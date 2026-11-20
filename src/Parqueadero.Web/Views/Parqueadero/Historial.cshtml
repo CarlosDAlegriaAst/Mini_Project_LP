@@ -1,0 +1,20 @@
+@model List<Registro>
+@{ ViewData["Title"] = "Historial"; var resumen = (List<ResumenTipo>)ViewBag.Resumen; }
+<h1 class="mb-3">Historial y recaudo</h1>
+<div class="row g-3 mb-3">
+@foreach (var r in resumen)
+{ <div class="col-12 col-sm-4"><div class="card card-body"><div class="fw-semibold">@r.Tipo</div><div>@r.Cantidad salidas</div><div class="fs-5">$@r.Total.ToString("N0")</div></div></div> }
+</div>
+<div class="table-responsive">
+<table class="table table-sm table-striped bg-white">
+  <thead><tr><th>Placa</th><th>Tipo</th><th>Entrada</th><th>Salida</th><th>Cobro</th></tr></thead>
+  <tbody>
+  @foreach (var r in Model)
+  { <tr><td>@r.Placa</td><td>@r.Tipo</td><td>@r.Entrada.ToString("dd/MM HH:mm")</td><td>@r.Salida?.ToString("dd/MM HH:mm")</td><td>$@r.ValorCobrado?.ToString("N0")</td></tr> }
+  </tbody>
+</table>
+</div>
+<div class="d-flex justify-content-between mt-2">
+  @if ((int)ViewBag.Pagina > 1) { <a class="btn btn-outline-dark btn-sm" asp-action="Historial" asp-route-pagina="@((int)ViewBag.Pagina - 1)">Anterior</a> } else { <span></span> }
+  @if ((bool)ViewBag.HayMas) { <a class="btn btn-outline-dark btn-sm" asp-action="Historial" asp-route-pagina="@((int)ViewBag.Pagina + 1)">Siguiente</a> }
+</div>

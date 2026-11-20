@@ -1,0 +1,7 @@
+:root { --accent: #0b6e4f; }
+body { background: #f4f6f5; }
+.espacio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .75rem; }
+.barra { height: .6rem; background: #dde5e1; border-radius: .3rem; overflow: hidden; }
+.barra > span { display: block; height: 100%; background: var(--accent); }
+.table-responsive { -webkit-overflow-scrolling: touch; }
+@media (max-width: 576px) { h1 { font-size: 1.5rem; } }

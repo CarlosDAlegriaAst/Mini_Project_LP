@@ -1,0 +1,55 @@
+@using Parqueadero.Web.Controllers
+@model PanelVM
+@{ ViewData["Title"] = "Panel"; }
+<h1 class="mb-3">Panel del parqueadero</h1>
+
+<div class="espacio-grid mb-4">
+@foreach (var (tipo, o) in Model.Ocupacion)
+{
+  var pct = o.Total == 0 ? 0 : o.Ocupados * 100 / o.Total;
+  <div class="card card-body">
+    <div class="fw-semibold">@tipo</div>
+    <div class="fs-4">@o.Ocupados / @o.Total</div>
+    <div class="barra"><span style="width:@pct%"></span></div>
+  </div>
+}
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6">
+    <div class="card card-body">
+      <h2 class="h5">Registrar entrada</h2>
+      <form method="post" asp-action="Ingreso">
+        <input name="placa" class="form-control mb-2 text-uppercase" placeholder="Placa (ej. ABC123)" required minlength="3" maxlength="8" pattern="[A-Za-z0-9]+" title="Solo letras y números" autocomplete="off" />
+        <select name="tipo" required class="form-select mb-2" asp-items="Html.GetEnumSelectList<TipoVehiculo>()"></select>
+        <button class="btn btn-success w-100">Registrar entrada</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="card card-body">
+      <h2 class="h5">Registrar salida</h2>
+      <form method="post" asp-action="Salida">
+        <input name="placa" class="form-control mb-2 text-uppercase" placeholder="Placa" required minlength="3" maxlength="8" pattern="[A-Za-z0-9]+" title="Solo letras y números" autocomplete="off" />
+        <button class="btn btn-dark w-100">Cobrar y liberar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<h2 class="h5 mt-4">Vehículos dentro (@Model.Activos.Count)</h2>
+<div class="table-responsive">
+<table class="table table-sm table-striped bg-white">
+  <thead><tr><th>Placa</th><th>Tipo</th><th>Espacio</th><th>Entrada</th></tr></thead>
+  <tbody>
+  @foreach (var r in Model.Activos)
+  { <tr><td>@r.Placa</td><td>@r.Tipo</td><td>@r.Espacio?.Codigo</td><td>@r.Entrada.ToString("dd/MM HH:mm")</td></tr> }
+  @if (!Model.Activos.Any()) { <tr><td colspan="4" class="text-muted">No hay vehículos dentro. Registra una entrada para empezar.</td></tr> }
+  </tbody>
+</table>
+</div>
+
+<h2 class="h5 mt-4">Últimos movimientos @(Model.EnEspera > 0 ? $"· {Model.EnEspera} en espera" : "")</h2>
+<ul class="list-group">
+  @foreach (var m in Model.Movimientos) { <li class="list-group-item">@m</li> }
+</ul>

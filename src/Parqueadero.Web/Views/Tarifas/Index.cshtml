@@ -1,0 +1,14 @@
+@model List<Tarifa>
+@{ ViewData["Title"] = "Tarifas"; }
+<h1 class="mb-3">Tarifas por hora</h1>
+@foreach (var t in Model)
+{
+  <form method="post" asp-action="Guardar" class="card card-body mb-2">
+    <input type="hidden" name="id" value="@t.Id" />
+    <div class="row g-2 align-items-center">
+      <div class="col-12 col-sm-4 fw-semibold">@t.Tipo</div>
+      <div class="col-8 col-sm-5"><input name="valorHora" type="number" min="0" max="1000000" step="100" required class="form-control" value="@t.ValorHora.ToString("0")" /></div>
+      <div class="col-4 col-sm-3"><button class="btn btn-success w-100">Guardar</button></div>
+    </div>
+  </form>
+}
