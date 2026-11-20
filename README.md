@@ -92,14 +92,3 @@ dotnet run --project src/Parqueadero.Desktop    # escritorio (Windows)
 
 La base de datos y los usuarios se crean automáticamente al primer arranque.
 
-## Publicar en GitHub
-
-```bash
-git init && git add . && git commit -m "Miniproyecto 2 - Parqueadero"
-git branch -M main
-git remote add origin https://github.com/<usuario>/parqueadero.git
-git push -u origin main
-```
-
-## Guion de la exposición (15 min)
-1. Problemática · 2. Justificación · 3. Metodología (capas, EF Core, Identity) · 4. Demo (web en celular/tablet, escritorio, roles) · 5. Conclusiones.
