@@ -1,7 +1,7 @@
 # Sistema de Gestión de Parqueadero
 
-**Asignatura:** Lenguajes de Programación · **Miniproyecto Final · **Fecha:** 17 de noviembre de 2026
-**Universidad Santiago de Cali (USC)**
+**Asignatura:** Lenguajes de Programación · **Miniproyecto Final · **Fecha:** 24 de noviembre de 2026
+**Universidad Santiago de Cali **
 
 ## Integrantes
 
